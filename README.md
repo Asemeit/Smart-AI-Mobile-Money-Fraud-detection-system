@@ -83,7 +83,11 @@ Open **http://localhost:5173** in your browser.
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | `GET` | `/api/health` | Service health check |
+| `POST` | `/api/auth/register` | Create account |
+| `POST` | `/api/auth/login` | Login, returns JWT |
+| `GET` | `/api/auth/me` | Current user (requires token) |
 | `POST` | `/api/fraud/verify` | Analyze a mobile money receipt |
+| `GET` | `/api/fraud/history` | Recent fraud checks (requires token) |
 | `GET` | `/api/transactions` | List recent transactions |
 | `POST` | `/api/advisor/chat` | Financial advisor chat |
 
@@ -92,6 +96,10 @@ Open **http://localhost:5173** in your browser.
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for branch naming, commit conventions, and pull request guidelines.
+
+**Frontend teammates:** start with [docs/FRONTEND_GUIDE.md](docs/FRONTEND_GUIDE.md).
+
+**Backend teammates:** start with [docs/BACKEND_GUIDE.md](docs/BACKEND_GUIDE.md).
 
 ---
 
