@@ -31,3 +31,6 @@ Thumbs.db
 
 # Testing
 coverage/
+
+# Local data (users, fraud checks) — do not commit
+backend/data/
