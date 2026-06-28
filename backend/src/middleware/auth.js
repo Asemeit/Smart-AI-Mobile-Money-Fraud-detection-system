@@ -1,17 +1,30 @@
 import jwt from 'jsonwebtoken';
 
-export function requireAuth(req, res, next) {
+function attachUser(req, res, next, required) {
   const header = req.headers.authorization;
   if (!header?.startsWith('Bearer ')) {
-    return res.status(401).json({ error: 'Authentication required' });
+    if (required) {
+      return res.status(401).json({ error: 'Authentication required' });
+    }
+    return next();
   }
 
   const token = header.slice(7);
   try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = payload;
+    req.user = jwt.verify(token, process.env.JWT_SECRET);
     next();
   } catch {
-    return res.status(401).json({ error: 'Invalid or expired token' });
+    if (required) {
+      return res.status(401).json({ error: 'Invalid or expired token' });
+    }
+    next();
   }
+}
+
+export function requireAuth(req, res, next) {
+  return attachUser(req, res, next, true);
+}
+
+export function optionalAuth(req, res, next) {
+  return attachUser(req, res, next, false);
 }

@@ -1,0 +1,87 @@
+.db-status {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.db-status.online {
+  border-color: rgba(22, 163, 74, 0.3);
+  background: var(--success-light);
+}
+
+.db-status.offline {
+  border-color: rgba(217, 119, 6, 0.3);
+  background: var(--warning-light);
+}
+
+.db-status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.2);
+}
+
+.db-status.offline .db-status-dot {
+  background: var(--warning);
+  box-shadow: 0 0 0 4px rgba(217, 119, 6, 0.2);
+}
+
+.db-stats {
+  margin-bottom: 1.25rem;
+}
+
+.db-insights h2,
+.db-collections h2 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.insight-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .insight-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.insight-item {
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--bg-accent);
+}
+
+.insight-item span {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 0.25rem;
+}
+
+.insight-item strong {
+  font-size: 1.5rem;
+}
+
+.db-collections table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.db-collections th,
+.db-collections td {
+  text-align: left;
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+.db-collections code {
+  background: var(--bg-accent);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
