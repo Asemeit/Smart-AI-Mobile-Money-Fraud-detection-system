@@ -4,11 +4,23 @@
   "private": true,
   "description": "Smart AI-Powered Mobile Money Fraud Detection System — group project starter",
   "scripts": {
+    "dev:all": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\" \"npm run dev:ai\"",
     "install:all": "npm install --prefix backend && npm install --prefix frontend",
     "dev:backend": "npm run dev --prefix backend",
     "dev:frontend": "npm run dev --prefix frontend",
     "dev:ai": "cd ai-service && python -m uvicorn main:app --reload --port 8000"
   },
-  "keywords": ["mobile-money", "fraud-detection", "fintech", "ai"],
-  "license": "MIT"
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  },
+  "keywords": [
+    "mobile-money",
+    "fraud-detection",
+    "fintech",
+    "ai"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.18.1"
+  }
 }
