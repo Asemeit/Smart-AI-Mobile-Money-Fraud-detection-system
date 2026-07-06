@@ -1,16 +1,44 @@
-import { NavLink, Outlet } from 'react-router-dom';
-import { ShieldIcon, DashboardIcon, ScanIcon, ChatIcon } from './Icons';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
+import OnboardingTutorial, { resetTutorial } from './OnboardingTutorial';
+import {
+  ShieldIcon,
+  DashboardIcon,
+  ScanIcon,
+  ChatIcon,
+  HistoryIcon,
+  DatabaseIcon,
+  LogoutIcon,
+} from './Icons';
 import './Layout.css';
 
 const links = [
   { to: '/', label: 'Dashboard', icon: DashboardIcon, end: true },
   { to: '/verify', label: 'Verify Receipt', icon: ScanIcon },
+  { to: '/history', label: 'History', icon: HistoryIcon },
+  { to: '/database', label: 'Database', icon: DatabaseIcon },
   { to: '/advisor', label: 'Financial Advisor', icon: ChatIcon },
 ];
 
 export default function Layout() {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const [tutorialKey, setTutorialKey] = useState(0);
+
+  function handleLogout() {
+    logout();
+    navigate('/welcome');
+  }
+
+  function replayTutorial() {
+    if (user?.id) resetTutorial(user.id);
+    setTutorialKey((k) => k + 1);
+  }
+
   return (
     <div className="app-shell">
+      <OnboardingTutorial key={tutorialKey} userId={user?.id} />
       <aside className="sidebar">
         <div className="sidebar-brand">
           <div className="brand-mark">
@@ -36,9 +64,23 @@ export default function Layout() {
           ))}
         </nav>
 
+        <div className="sidebar-user">
+          <div className="user-avatar">{user?.name?.charAt(0)?.toUpperCase() || 'U'}</div>
+          <div className="user-info">
+            <strong>{user?.name}</strong>
+            <span>{user?.email}</span>
+          </div>
+          <button type="button" className="logout-btn" onClick={handleLogout} title="Sign out">
+            <LogoutIcon size={18} />
+          </button>
+        </div>
+
         <div className="sidebar-footer">
           <div className="status-dot" />
-          <span>System active</span>
+          <span>System active · Secure</span>
+          <button type="button" className="help-tutorial-btn" onClick={replayTutorial}>
+            ? Tutorial
+          </button>
         </div>
       </aside>
 
@@ -48,6 +90,9 @@ export default function Layout() {
             <ShieldIcon size={20} />
             <strong>MoMo Shield</strong>
           </div>
+          <button type="button" className="mobile-logout" onClick={handleLogout}>
+            <LogoutIcon size={18} />
+          </button>
         </header>
 
         <main className="page-content">
@@ -56,7 +101,7 @@ export default function Layout() {
       </div>
 
       <nav className="mobile-nav">
-        {links.map(({ to, label, icon: Icon, end }) => (
+        {links.slice(0, 4).map(({ to, label, icon: Icon, end }) => (
           <NavLink
             key={to}
             to={to}

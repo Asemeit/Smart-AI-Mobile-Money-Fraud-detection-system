@@ -4,9 +4,10 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import { connectDB, dbConnected } from './config/db.js';
 import fraudRoutes from './routes/fraud.js';
-import transactionRoutes, { seedTransactionsIfEmpty } from './routes/transactions.js';
+import transactionRoutes from './routes/transactions.js';
 import advisorRoutes from './routes/advisor.js';
 import authRoutes from './routes/auth.js';
+import databaseRoutes from './routes/database.js';
 
 dotenv.config();
 
@@ -25,7 +26,7 @@ app.get('/api/health', (_req, res) => {
   res.json({
     status: 'ok',
     service: 'Mobile Money Fraud Detection API',
-    version: '0.2.0',
+    version: '0.3.0',
     database: dbConnected ? 'mongodb' : 'file-fallback',
     auth: 'jwt',
     timestamp: new Date().toISOString(),
@@ -36,6 +37,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/fraud', fraudRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/advisor', advisorRoutes);
+app.use('/api/database', databaseRoutes);
 
 app.use((_req, res) => {
   res.status(404).json({ error: 'Route not found' });
@@ -66,9 +68,6 @@ process.on('SIGINT', () => shutdown('SIGINT'));
 async function start() {
   if (process.env.MONGODB_URI) {
     await connectDB();
-    if (dbConnected) {
-      await seedTransactionsIfEmpty();
-    }
   }
 
   return new Promise((resolve, reject) => {
