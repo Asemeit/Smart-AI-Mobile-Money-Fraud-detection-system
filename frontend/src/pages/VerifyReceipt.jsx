@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { apiPost } from '../api/client';
 import { useToast } from '../context/ToastContext';
 import { ScanIcon, AlertIcon, CheckIcon } from '../components/Icons';
+import FraudExplanation from '../components/FraudExplanation';
 import { verdictMeta } from '../utils/verdictMeta';
 import './VerifyReceipt.css';
+import '../components/OnboardingTutorial.css';
 
 const SAMPLE_FAKE = `CONFIRMED! You received KSH 5,000 from 2547XX. Click here to verify: http://bit.ly/fake-mpesa`;
 
@@ -117,7 +119,9 @@ export default function VerifyReceipt() {
           <div className="risk-alert-content">
             <strong>{meta.action}</strong>
             <p>{meta.message}</p>
-            <span className="risk-alert-score">Risk score: {result.riskScore}%</span>
+            <span className="risk-alert-score">
+              Risk: {result.riskScore}% · Confidence: {result.confidenceScore ?? '—'}%
+            </span>
           </div>
         </div>
       )}
@@ -237,6 +241,17 @@ export default function VerifyReceipt() {
 
           {result && meta && (
             <div className={`result-content ${meta.className}`}>
+              <div className="score-dual">
+                <div className="score-dual-item risk">
+                  <span>Risk score</span>
+                  <strong>{result.riskScore}%</strong>
+                </div>
+                <div className="score-dual-item confidence">
+                  <span>Confidence score</span>
+                  <strong>{result.confidenceScore ?? 0}%</strong>
+                </div>
+              </div>
+
               <RiskGauge score={result.riskScore} verdict={result.verdict} />
 
               <div className="verdict-banner">
@@ -277,6 +292,8 @@ export default function VerifyReceipt() {
               {result.note && (
                 <p className="result-note muted">{result.note}</p>
               )}
+
+              <FraudExplanation result={result} />
 
               {result.flags?.length > 0 && (
                 <div className="flags-section">

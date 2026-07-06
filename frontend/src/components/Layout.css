@@ -81,6 +81,7 @@
 
 .sidebar-footer {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1rem;
@@ -88,6 +89,21 @@
   color: var(--muted);
   border-top: 1px solid var(--border);
   margin-top: 0.5rem;
+}
+
+.help-tutorial-btn {
+  margin-left: auto;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--primary-dark);
+  cursor: pointer;
+}
+
+.help-tutorial-btn:hover {
+  background: var(--primary-light);
 }
 
 .sidebar-user {

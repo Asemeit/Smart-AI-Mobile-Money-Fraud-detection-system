@@ -90,6 +90,21 @@ function hasSuspiciousPhrase(text) {
   return { flags, score };
 }
 
+function computeConfidenceScore(flags, parsed) {
+  let confidence = 40;
+  if (parsed?.transactionId || parsed?.account) confidence += 20;
+  if (parsed?.amount != null) confidence += 15;
+  if (parsed?.provider) confidence += 15;
+
+  const positive = flags.filter((f) => f.startsWith('✓')).length;
+  const negative = flags.filter((f) => !f.startsWith('✓')).length;
+
+  confidence += positive * 6;
+  confidence -= negative * 4;
+
+  return Math.max(0, Math.min(100, Math.round(confidence)));
+}
+
 function finalizeScore(riskScore, flags, parsed, documentType, note) {
   riskScore = Math.max(0, Math.min(100, riskScore));
 
@@ -97,8 +112,11 @@ function finalizeScore(riskScore, flags, parsed, documentType, note) {
   if (riskScore >= 60) verdict = 'HIGH_RISK';
   else if (riskScore >= 30) verdict = 'SUSPICIOUS';
 
+  const confidenceScore = computeConfidenceScore(flags, parsed);
+
   return {
     riskScore,
+    confidenceScore,
     verdict,
     flags,
     parsed: { ...parsed, documentType },

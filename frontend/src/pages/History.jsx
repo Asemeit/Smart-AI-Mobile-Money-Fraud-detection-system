@@ -60,6 +60,7 @@ export default function History() {
                 <p className="history-message">{check.messageText.slice(0, 120)}{check.messageText.length > 120 ? '…' : ''}</p>
                 <div className="history-meta">
                   <span>Risk: {check.riskScore}%</span>
+                  <span>Confidence: {check.confidenceScore ?? '—'}%</span>
                   {check.provider && <span>{check.provider}</span>}
                   {check.amount != null && <span>Amount: {check.amount}</span>}
                 </div>

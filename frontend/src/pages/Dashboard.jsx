@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { apiGet } from '../api/client';
 import { useAuth } from '../context/AuthContext';
 import { CheckIcon, AlertIcon, WalletIcon, ScanIcon } from '../components/Icons';
+import TrustBanner from '../components/TrustBanner';
 import './Dashboard.css';
 
 function verdictToStatus(verdict) {
@@ -73,6 +74,8 @@ export default function Dashboard() {
           Verify now
         </Link>
       </section>
+
+      <TrustBanner />
 
       <section className="hero">
         <div className="hero-content">
@@ -180,6 +183,7 @@ export default function Dashboard() {
                   <th>Source</th>
                   <th>Amount</th>
                   <th>Risk</th>
+                  <th>Confidence</th>
                   <th>Status</th>
                 </tr>
               </thead>
@@ -202,10 +206,15 @@ export default function Dashboard() {
                               }}
                             />
                           </div>
-                          <span>{check.riskScore}%</span>
-                        </div>
-                      </td>
-                      <td><span className={statusBadge(status)}>{status}</span></td>
+                        <span>{check.riskScore}%</span>
+                      </div>
+                    </td>
+                    <td>
+                      <strong style={{ color: 'var(--primary-dark)' }}>
+                        {check.confidenceScore ?? '—'}%
+                      </strong>
+                    </td>
+                    <td><span className={statusBadge(status)}>{status}</span></td>
                     </tr>
                   );
                 })}

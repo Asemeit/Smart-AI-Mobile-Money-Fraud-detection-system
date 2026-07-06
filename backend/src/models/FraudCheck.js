@@ -10,6 +10,7 @@ const fraudCheckSchema = new mongoose.Schema(
     documentType: String,
     amount: Number,
     riskScore: { type: Number, default: 0 },
+    confidenceScore: { type: Number, default: 0 },
     verdict: String,
     flags: [String],
     source: { type: String, default: 'rule-engine' },

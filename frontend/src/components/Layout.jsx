@@ -1,5 +1,7 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import OnboardingTutorial, { resetTutorial } from './OnboardingTutorial';
 import {
   ShieldIcon,
   DashboardIcon,
@@ -22,14 +24,21 @@ const links = [
 export default function Layout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const [tutorialKey, setTutorialKey] = useState(0);
 
   function handleLogout() {
     logout();
     navigate('/welcome');
   }
 
+  function replayTutorial() {
+    if (user?.id) resetTutorial(user.id);
+    setTutorialKey((k) => k + 1);
+  }
+
   return (
     <div className="app-shell">
+      <OnboardingTutorial key={tutorialKey} userId={user?.id} />
       <aside className="sidebar">
         <div className="sidebar-brand">
           <div className="brand-mark">
@@ -68,7 +77,10 @@ export default function Layout() {
 
         <div className="sidebar-footer">
           <div className="status-dot" />
-          <span>System active</span>
+          <span>System active · Secure</span>
+          <button type="button" className="help-tutorial-btn" onClick={replayTutorial}>
+            ? Tutorial
+          </button>
         </div>
       </aside>
 
