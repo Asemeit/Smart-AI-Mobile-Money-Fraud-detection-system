@@ -81,13 +81,93 @@
 
 .sidebar-footer {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1rem;
   font-size: 0.8rem;
   color: var(--muted);
   border-top: 1px solid var(--border);
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+}
+
+.help-tutorial-btn {
+  margin-left: auto;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--primary-dark);
+  cursor: pointer;
+}
+
+.help-tutorial-btn:hover {
+  background: var(--primary-light);
+}
+
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.75rem 1rem;
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.user-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.user-info strong {
+  display: block;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-info span {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.logout-btn {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  padding: 0.35rem;
+  border-radius: 8px;
+}
+
+.logout-btn:hover {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
+.mobile-logout {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  padding: 0.35rem;
 }
 
 .status-dot {
@@ -141,6 +221,7 @@
   .mobile-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 1rem;
     background: var(--surface);
     border-bottom: 1px solid var(--border);

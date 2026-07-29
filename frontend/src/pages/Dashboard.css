@@ -4,6 +4,50 @@
   gap: 1.5rem;
 }
 
+.welcome-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, var(--surface) 0%, var(--bg-accent) 100%);
+  border-color: rgba(5, 150, 105, 0.2);
+}
+
+.welcome-text h2 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.02em;
+}
+
+.welcome-text p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  max-width: 52ch;
+  line-height: 1.5;
+}
+
+.welcome-sw {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  font-style: italic;
+}
+
+.welcome-cta {
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .welcome-cta {
+    width: 100%;
+  }
+}
+
 .hero {
   display: grid;
   gap: 2rem;

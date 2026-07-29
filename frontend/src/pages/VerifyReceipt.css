@@ -2,6 +2,75 @@
   align-items: start;
 }
 
+.risk-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--radius);
+  margin-bottom: 1.25rem;
+  border: 2px solid transparent;
+  animation: alert-in 0.35s ease;
+}
+
+@keyframes alert-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.risk-alert-success {
+  background: var(--success-light);
+  border-color: rgba(22, 163, 74, 0.45);
+  color: var(--success);
+}
+
+.risk-alert-warning {
+  background: var(--warning-light);
+  border-color: rgba(217, 119, 6, 0.45);
+  color: var(--warning);
+}
+
+.risk-alert-danger {
+  background: var(--danger-light);
+  border-color: rgba(220, 38, 38, 0.5);
+  color: var(--danger);
+}
+
+.risk-alert-icon {
+  flex-shrink: 0;
+}
+
+.risk-alert-content strong {
+  display: block;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.35rem;
+  color: var(--text);
+}
+
+.risk-alert-content p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.risk-alert-score {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.65);
+  color: var(--text);
+}
+
 .verify-form {
   position: relative;
 }
@@ -12,6 +81,41 @@
   gap: 0.35rem;
   flex-wrap: wrap;
   margin-bottom: 1.25rem;
+}
+
+.doc-type-toggle {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.doc-type-btn {
+  flex: 1;
+  min-width: 100px;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.doc-type-btn.active {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+.doc-type-btn:hover:not(.active) {
+  border-color: var(--muted);
+}
+
+.flags-section li.flag-ok {
+  background: var(--success-light);
+  border-left-color: var(--success);
+  color: var(--success);
 }
 
 .submit-btn {
@@ -206,6 +310,28 @@
 .result-high .flags-section li {
   background: var(--danger-light);
   border-left-color: var(--danger);
+}
+
+.result-unsupported .verdict-banner {
+  background: #f1f5f9;
+  color: var(--text-secondary);
+}
+
+.risk-alert-neutral {
+  background: #f1f5f9;
+  border-color: var(--border-strong);
+  color: var(--text-secondary);
+}
+
+.risk-alert-neutral .risk-alert-content strong {
+  color: var(--text);
+}
+
+.result-note {
+  width: 100%;
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 0.5rem 0;
 }
 
 .result-warn .flags-section li {

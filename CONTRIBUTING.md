@@ -4,8 +4,10 @@ Thank you for contributing to the Mobile Money Fraud Detection System.
 
 ## Getting started
 
-1. Clone the repo and create a branch from `main`:
+1. Clone the repo, switch to `develop`, and create your branch:
    ```bash
+   git checkout develop
+   git pull origin develop
    git checkout -b feature/your-name-module
    ```
 2. Run `npm run install:all` and start the dev servers (see README).
