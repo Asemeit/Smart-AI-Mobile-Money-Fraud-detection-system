@@ -1,17 +1,16 @@
 # Smart AI Mobile Money Fraud Detection System
 
 A web-based platform that helps mobile money merchants and small business owners detect fake payment receipts, identify suspicious transactions, and receive practical financial guidance.
-
 Supports popular platforms including **M-Pesa**, **MTN MoMo**, and **Airtel Money**.
 
 ---
 
 ## Features
 
-- **Receipt verification** — Paste an SMS or payment confirmation and get an instant fraud risk score
-- **Transaction dashboard** — Track verified and flagged payments in one place
-- **AI financial advisor** — Budgeting, saving, and fraud-awareness tips through a chat interface
-- **Multi-platform support** — Built for the mobile money formats used across East and West Africa
+- **Receipt verification** - Paste an SMS or payment confirmation and get an instant fraud risk score
+- **Transaction dashboard** - Track verified and flagged payments in one place
+- **AI financial advisor** - Budgeting, saving, and fraud-awareness tips through a chat interface
+- **Multi-platform support** - Built for the mobile money formats used across East and West Africa
 
 ---
 
